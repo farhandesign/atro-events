@@ -3,7 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
-const eventsRouter = require('./routes/events');
+const createEventRouter = require('./routes/create-event');
 
 // Create Server Obj
 const server = express();
@@ -35,7 +35,7 @@ server.get('/', (req, res) => {
 });
 
 // Use Events Routes
-server.use('/events', eventsRouter);
+server.use('/create-event', createEventRouter);
 
 server.listen(3500, () => {
 	console.log('Server running on port 3500');
