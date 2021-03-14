@@ -3,14 +3,17 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
-const eventsRouter = require('./routes/events');
+require('dotenv').config();
+
+const createEventRouter = require('./routes/create-event');
+const usersRouter = require('./routes/users');
 
 // Create Server Obj
 const server = express();
 
 // Connect to DB using mongoose
-const connectionString =
-	'mongodb+srv://farhan_design:farhan_design@cluster0.mafhi.mongodb.net/astro_events?retryWrites=true&w=majority';
+const connectionString = process.env.DB_URL;
+
 const connectionConfig = {
 	useNewUrlParser: true,
 	useUnifiedTopology: true
@@ -35,8 +38,12 @@ server.get('/', (req, res) => {
 });
 
 // Use Events Routes
-server.use('/events', eventsRouter);
+server.use('/create-event', createEventRouter);
+// Use Users Routes
+server.use('/users', usersRouter);
 
-server.listen(3500, () => {
+// Use Heroku port number if it exits otherwise use 3500
+const port = process.env.PORT || 3500;
+server.listen(port, () => {
 	console.log('Server running on port 3500');
 });
