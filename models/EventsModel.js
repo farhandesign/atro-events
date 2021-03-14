@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 
 // Schema
-const EventSchema = new mongoose.Schema({
+const EventsSchema = new mongoose.Schema({
 	name: {
 		type: String,
 		required: true
@@ -25,6 +25,6 @@ const EventSchema = new mongoose.Schema({
 });
 
 // Model
-const EventModel = mongoose.model('events', EventSchema); // => ('collection name', Schema Name)
+const EventsModel = mongoose.model('events', EventsSchema); // => ('collection name', Schema Name)
 
-module.exports = EventModel;
+module.exports = EventsModel;
