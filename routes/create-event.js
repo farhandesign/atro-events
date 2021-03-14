@@ -1,11 +1,12 @@
 // Route for Events Page
 const express = require('express');
 const router = express.Router();
+const authorize = require('../middleware/auth');
 
-const EventModel = require('../models/EventModel');
+const EventsModel = require('../models/EventsModel');
 
 // GET
-router.get('/', (req, res) => {
+router.get('/', authorize, (req, res) => {
 	res.send('<h1>Create Events Page</h1>');
 });
 
@@ -19,7 +20,7 @@ router.post('/', (req, res) => {
 		eventDate: req.body.eventDate
 	};
 
-	const newEventModel = new EventModel(formData);
+	const newEventsModel = new EventsModel(formData);
 
 	newEventModel
 		.save()
